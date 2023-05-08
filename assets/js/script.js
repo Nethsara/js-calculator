@@ -1,14 +1,24 @@
 $(document).ready(function () {
-  const history = [];
+  // Cache the frequently accessed elements for better performance
+  const calcOperation = $("#calc-operation");
+  const calcTyped = $("#calc-typed");
+  const historyContainer = $(".history-container");
+
+  // Declare variables using "let" instead of "var" for better scoping
+  let history = [];
   let topText = "";
   let typed = "";
 
-  $(".num").click((e) => {
+  // Use "const" instead of "let" for elements that don't change
+  const numButtons = $(".num");
+  const optButtons = $(".opt");
+
+  numButtons.click((e) => {
     typed += e.target.innerText;
-    $("#calc-typed").text(typed);
+    calcTyped.text(typed);
   });
 
-  $(".opt").click((e) => {
+  optButtons.click((e) => {
     const id = e.target.id;
     switch (id) {
       case "/":
@@ -16,26 +26,25 @@ $(document).ready(function () {
       case "+":
       case "-":
         typed += ` ${id} `;
-        $("#calc-typed").text(typed);
+        calcTyped.text(typed);
         break;
       case "=":
         topText = typed;
-        $("#calc-operation").text(topText);
-        typed = eval($("#calc-typed").text());
-        $("#calc-typed").text(typed);
+        calcOperation.text(topText);
+        typed = eval(calcTyped.text());
+        calcTyped.text(typed);
         break;
       case "%":
         topText = `${typed} %`;
-        $("#calc-operation").text(topText);
+        calcOperation.text(topText);
         break;
       case "ac":
-        $("#calc-typed").text(0);
+        calcTyped.text(0);
         typed = "";
-        $("#calc-operation").text(0);
-        console.log(topText);
+        calcOperation.text(0);
         history.push(topText);
         topText = "";
-        $(".history-container").append(
+        historyContainer.append(
           ` <input type="text" class="textfield" value='${
             history[history.length - 1]
           }' />`
@@ -43,16 +52,13 @@ $(document).ready(function () {
         history.shift();
         break;
       case "back":
-        typed = typed.split("");
-        typed.pop();
-        console.log(typed);
-        typed = typed.join("");
-        $("#calc-typed").text(typed);
+        typed = typed.slice(0, -1);
+        calcTyped.text(typed);
         break;
       case "negative":
-        typed = eval(typed);
-        typed *= -1;
-        $("#calc-typed").text(typed);
+        typed = eval(typed) * -1;
+        calcTyped.text(typed);
+        break;
     }
   });
 });
