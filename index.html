@@ -20,9 +20,9 @@
         </div>
 
         <div class="calc-button-row">
-          <button class="opt ac">AC</button>
-          <button class="opt negative">+/-</button>
-          <button class="opt percentage">%</button>
+          <button class="opt" id="ac">AC</button>
+          <button class="opt" id="negative">+/-</button>
+          <button class="opt" id="percentage">%</button>
           <button class="opt" id="/">/</button>
           <button class="num">7</button>
           <button class="num">8</button>
@@ -38,16 +38,14 @@
           <button class="opt" id="+">+</button>
           <button class="num">0</button>
           <button class="num">.</button>
-          <button class="opt back">&#9003;</button>
-          <button class="equal">=</button>
+          <button class="opt" id="back">&#9003;</button>
+          <button class="opt" id="=">=</button>
         </div>
       </div>
       <div class="history-panel">
         <span class="material-symbols-sharp"> history </span>
         <h3 class="history-head">History</h3>
-        <div class="history-container">
-          <input type="text" class="textfield" />
-        </div>
+        <div class="history-container"></div>
       </div>
     </div>
     <script
@@ -57,30 +55,6 @@
       referrerpolicy="no-referrer"
     ></script>
 
-    <script>
-      const history = [];
-      let operation;
-      let typed = "";
-
-      $(".num").click((e) => {
-        typed += e.target.innerText;
-        $("#calc-typed").text(typed);
-      });
-
-      $(".opt").click((e) => {
-        const classList = [...e.target.classList];
-        console.log(e.target.innerText);
-        typed += ` ${e.target.innerText} `;
-        console.log(typed);
-        $("#calc-typed").text(typed);
-      });
-
-      $(".equal").click((e) => {
-        operation = typed;
-        $("#calc-operation").text(operation);
-        typed = eval($("#calc-typed").text());
-        $("#calc-typed").text(typed);
-      });
-    </script>
+    <script src="assets/js/script.js"></script>
   </body>
 </html>
