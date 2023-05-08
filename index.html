@@ -15,31 +15,31 @@
     <div class="main-container">
       <div class="calc-body">
         <div class="calc-screen">
-          <div id="calc-operation">1234 + 567 +</div>
-          <div id="calc-typed">890</div>
+          <div id="calc-operation">0</div>
+          <div id="calc-typed">0</div>
         </div>
 
         <div class="calc-button-row">
-          <button class="ac">AC</button>
-          <button class="opt">&#43;&#47;&#8722;</button>
-          <button class="opt">&#37;</button>
-          <button class="opt">&#247;</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button class="opt">&#215;</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button class="opt">&#8722;</button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button class="opt">&#43;</button>
-          <button>0</button>
-          <button>.</button>
-          <button>&#9003;</button>
-          <button class="opt">&#61;</button>
+          <button class="opt ac">AC</button>
+          <button class="opt negative">+/-</button>
+          <button class="opt percentage">%</button>
+          <button class="opt" id="/">/</button>
+          <button class="num">7</button>
+          <button class="num">8</button>
+          <button class="num">9</button>
+          <button class="opt" id="*">*</button>
+          <button class="num">4</button>
+          <button class="num">5</button>
+          <button class="num">6</button>
+          <button class="opt" id="-">-</button>
+          <button class="num">1</button>
+          <button class="num">2</button>
+          <button class="num">3</button>
+          <button class="opt" id="+">+</button>
+          <button class="num">0</button>
+          <button class="num">.</button>
+          <button class="opt back">&#9003;</button>
+          <button class="equal">=</button>
         </div>
       </div>
       <div class="history-panel">
@@ -47,14 +47,40 @@
         <h3 class="history-head">History</h3>
         <div class="history-container">
           <input type="text" class="textfield" />
-          <input type="text" class="textfield" />
-          <input type="text" class="textfield" />
-          <input type="text" class="textfield" />
-          <input type="text" class="textfield" />
         </div>
       </div>
     </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+      integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
-    <script src="assets/js/script.js"></script>
+    <script>
+      const history = [];
+      let operation;
+      let typed = "";
+
+      $(".num").click((e) => {
+        typed += e.target.innerText;
+        $("#calc-typed").text(typed);
+      });
+
+      $(".opt").click((e) => {
+        const classList = [...e.target.classList];
+        console.log(e.target.innerText);
+        typed += ` ${e.target.innerText} `;
+        console.log(typed);
+        $("#calc-typed").text(typed);
+      });
+
+      $(".equal").click((e) => {
+        operation = typed;
+        $("#calc-operation").text(operation);
+        typed = eval($("#calc-typed").text());
+        $("#calc-typed").text(typed);
+      });
+    </script>
   </body>
 </html>

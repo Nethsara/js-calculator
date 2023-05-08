@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  background-color: #3e4b5c;
+  background-color: #23252e;
 }
 .main-container {
   display: flex;
@@ -14,6 +14,7 @@
   height: 400px;
   box-shadow: 0 8px 50px -7px black;
   background: #3a4655;
+  border: #3a4655 1px solid;
 }
 .calc-screen {
   padding: 1rem;
@@ -36,7 +37,7 @@
 .calc-button-row button {
   display: table-cell;
   width: 25%;
-  background: #425062;
+  background: #292d36;
   color: #fff;
   height: 65px;
   font-size: 1.3rem;
